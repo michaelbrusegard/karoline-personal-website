@@ -1,16 +1,20 @@
+import { createFileRoute } from '@tanstack/react-router';
+
 import { AboutSeparator } from '@/components/AboutSeparator';
 
-export default function Page() {
+export const Route = createFileRoute('/')({
+  component: HomePage,
+});
+
+function HomePage() {
   return (
-    <>
-      <main className='h-full w-full'>
-        <section className='clamp-[px-4-24-clamp] mx-auto flex h-full w-full max-w-screen-2xl items-center justify-center py-6'>
-          <h1 className='clamp-[text-7xl-9xl-clamp] font-medium'>
-            KAROLINE ZHIWEN LIE HOLM
-          </h1>
-        </section>
-        <AboutSeparator />
-      </main>
-    </>
+    <main className='flex flex-1 flex-col'>
+      <section className='mx-auto flex min-h-dvh w-full max-w-(--breakpoint-2xl) items-center justify-center px-[clamp(1rem,4vw,6rem)] py-6'>
+        <h1 className='text-center text-[clamp(4.5rem,12vw,8rem)] leading-none font-medium'>
+          KAROLINE ZHIWEN LIE HOLM
+        </h1>
+      </section>
+      <AboutSeparator />
+    </main>
   );
 }

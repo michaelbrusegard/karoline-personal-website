@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router';
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -5,86 +7,79 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '@/components/ui/NavigationMenu';
+} from '@/components/ui/navigation-menu';
+import { projects } from '@/lib/projects';
 
-function ListItem({
-  title,
-  children,
-  href,
-  ...props
-}: React.ComponentPropsWithoutRef<'li'> & { href: string }) {
+type ListItemProps = {
+  title: string;
+  children: React.ReactNode;
+  render: React.ReactElement;
+};
+
+function ListItem({ title, children, render }: ListItemProps) {
   return (
-    <li {...props}>
-      <NavigationMenuLink asChild>
-        <a
-          href={href}
-          className='hover:bg-muted/20 focus:bg-muted/40 block rounded-md p-3 transition-colors'
-        >
-          <div className='mb-1 text-sm leading-none font-medium'>{title}</div>
-          <p className='text-muted-foreground text-xs leading-snug'>
-            {children}
-          </p>
-        </a>
+    <li>
+      <NavigationMenuLink className='block rounded-md p-3' render={render}>
+        <div className='mb-1 text-sm leading-none font-medium'>{title}</div>
+        <p className='text-xs leading-snug text-muted-foreground'>{children}</p>
       </NavigationMenuLink>
     </li>
   );
 }
 
+const triggerClassName = 'font-heading text-base uppercase';
+
 function Header() {
   return (
-    <header className='clamp-[px-4-24-clamp] fixed flex w-full max-w-screen-2xl justify-end py-4'>
-      <NavigationMenu viewport={false}>
+    <header className='fixed inset-x-0 top-0 z-40 flex justify-end px-[clamp(1rem,4vw,6rem)] py-4'>
+      <NavigationMenu align='end'>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>PROJECTS</NavigationMenuTrigger>
+            <NavigationMenuLink render={<Link to='/' />} className={triggerClassName}>
+              Home
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className={triggerClassName}>Projects</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className='grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-1'>
-                <ListItem href='/projects/webapp' title='Web App'>
-                  A modern web application built with React, TypeScript, and
-                  Tailwind CSS.
+              <ul className='grid w-[min(90vw,28rem)] gap-1'>
+                <ListItem title='All projects' render={<Link to='/projects' />}>
+                  Everything in one place.
                 </ListItem>
-                <ListItem href='/projects/portfolio' title='Portfolio Site'>
-                  A personal portfolio to showcase design, development, and
-                  creative work.
-                </ListItem>
-                <ListItem href='/projects/opensource' title='Open Source'>
-                  Contributions and personal open source projects.
-                </ListItem>
+                {projects.map((project) => (
+                  <ListItem
+                    key={project.slug}
+                    title={project.title}
+                    render={<Link to='/projects/$slug' params={{ slug: project.slug }} />}
+                  >
+                    {project.summary}
+                  </ListItem>
+                ))}
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>ABOUT</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className='grid w-[340px] gap-2'>
-                <ListItem href='/about' title='Who am I?'>
-                  Learn about my background, skills, and philosophy.
-                </ListItem>
-                <ListItem href='/about/resume' title='Resume'>
-                  Professional experience, education, and skills overview.
-                </ListItem>
-                <ListItem href='/about/interests' title='Interests'>
-                  Design, coding, art, and creative interests.
-                </ListItem>
-              </ul>
-            </NavigationMenuContent>
+            <NavigationMenuLink render={<Link to='/about' />} className={triggerClassName}>
+              About
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>CONTACT</NavigationMenuTrigger>
+            <NavigationMenuTrigger className={triggerClassName}>Contact</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className='grid w-[260px] gap-2'>
-                <ListItem href='mailto:karoline@email.tld' title='Email'>
-                  Get in touch by email for collaboration, freelance, or
-                  questions.
+              <ul className='grid w-[min(90vw,18rem)] gap-1'>
+                <ListItem title='Email' render={<a href='mailto:karoline@email.tld' />}>
+                  Get in touch for collaboration, freelance, or questions.
                 </ListItem>
-                <ListItem href='/contact' title='Contact Form'>
+                <ListItem title='Contact form' render={<Link to='/contact' />}>
                   Fill out the form for a quick response.
                 </ListItem>
                 <ListItem
-                  href='https://linkedin.com/in/karoline'
                   title='LinkedIn'
+                  render={
+                    <a href='https://linkedin.com/in/karoline' target='_blank' rel='noreferrer' />
+                  }
                 >
-                  Connect on LinkedIn for professional networking.
+                  Connect for professional networking.
                 </ListItem>
               </ul>
             </NavigationMenuContent>

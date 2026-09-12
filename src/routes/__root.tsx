@@ -1,21 +1,25 @@
-import Page from '@/routes';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
 
 import { CanvasCursor } from '@/components/CanvasCursor';
-import { ScrollArea } from '@/components/ui/ScrollArea';
 import { Header } from '@/components/Header';
-import { Toaster } from '@/components/ui/Toaster';
+import { NotFound } from '@/components/NotFound';
+import { Toaster } from '@/components/ui/sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
-export default function Root() {
+export const Route = createRootRoute({
+  component: RootLayout,
+  notFoundComponent: NotFound,
+});
+
+function RootLayout() {
   return (
-    <>
+    <TooltipProvider>
       <CanvasCursor />
-      <ScrollArea className='h-full w-full'>
-        <div className='h-screen w-screen'>
-          <Header/>
-          <Page />
-          <Toaster />
-        </div>
-      </ScrollArea>
-    </>
+      <div className='relative flex min-h-dvh flex-col'>
+        <Header />
+        <Outlet />
+      </div>
+      <Toaster />
+    </TooltipProvider>
   );
 }

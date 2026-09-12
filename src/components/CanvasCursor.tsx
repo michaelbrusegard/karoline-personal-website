@@ -1,11 +1,9 @@
-'use client';
-
 import { useCanvasCursor } from '@/hooks/useCanvasCursor';
 
 function CanvasCursor() {
-  useCanvasCursor();
+  const ref = useCanvasCursor();
 
-  return <canvas className='pointer-events-none fixed inset-0' id='canvas' />;
+  return <canvas ref={ref} aria-hidden className='pointer-events-none fixed inset-0 z-50' />;
 }
 
 export { CanvasCursor };

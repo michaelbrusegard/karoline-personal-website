@@ -6,6 +6,13 @@
 
 # build
 /dist
+*.tsbuildinfo
+
+# vite+
+/.vite
+/node_modules/.vite-plus
 
 # environment variables
 .env
+.env.*
+!.env.example

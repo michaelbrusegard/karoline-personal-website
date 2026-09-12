@@ -1,71 +1,61 @@
-import { motion } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
+import { Link } from '@tanstack/react-router';
+import { motion, useReducedMotion } from 'motion/react';
+import { useLayoutEffect, useRef, useState } from 'react';
+
+const REPEAT_COUNT = 12;
+
+function MarqueeItems({ ref }: { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <div ref={ref} className='flex min-w-max shrink-0 gap-16 pr-16'>
+      {Array.from({ length: REPEAT_COUNT }, (_, index) => (
+        // eslint-disable-next-line react/no-array-index-key -- static, identical items
+        <span key={index} className='flex shrink-0 items-center justify-center gap-4 px-8'>
+          <span className='size-[clamp(2rem,3vw,3rem)] rounded-full bg-primary' />
+          <span className='text-[clamp(1.125rem,1.5vw,1.25rem)] font-semibold'>ABOUT</span>
+        </span>
+      ))}
+    </div>
+  );
+}
 
 function AboutSeparator() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [contentWidth, setContentWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null),
+    [contentWidth, setContentWidth] = useState(0),
+    reducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    const measure = () => {
-      if (containerRef.current) {
-        setContentWidth(containerRef.current.offsetWidth);
+  useLayoutEffect(() => {
+    const element = containerRef.current;
+    if (!element) {
+      return;
+    }
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry) {
+        setContentWidth(entry.borderBoxSize[0]?.inlineSize ?? entry.contentRect.width);
       }
+    });
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
     };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
   }, []);
 
-  const repeatCount = 12;
-  const aboutItems = Array.from({ length: repeatCount });
+  const animate = contentWidth > 0 && !reducedMotion;
 
   return (
-    <div className='bg-background clamp-[h-24-32-clamp] relative flex w-full items-center overflow-hidden border-y'>
+    <Link
+      to='/about'
+      aria-label='About'
+      className='relative flex h-[clamp(6rem,10vw,8rem)] w-full items-center overflow-hidden border-y bg-background'
+    >
       <motion.div
         className='flex shrink-0'
-        animate={contentWidth ? { x: [0, -(contentWidth + 64)] } : {}}
-        transition={
-          contentWidth
-            ? {
-                duration: 25,
-                ease: 'linear',
-                repeat: Infinity,
-              }
-            : undefined
-        }
+        animate={animate ? { x: [0, -contentWidth] } : { x: 0 }}
+        transition={animate ? { duration: 25, ease: 'linear', repeat: Infinity } : { duration: 0 }}
       >
-        <div
-          ref={containerRef}
-          className='mr-16 flex min-w-max shrink-0 gap-16'
-        >
-          {aboutItems.map((_, idx) => (
-            <div
-              key={idx}
-              className='flex shrink-0 items-center justify-center gap-4 px-8'
-            >
-              <div className='bg-primary clamp-[size-8-12-clamp] rounded-full' />
-              <span className='clamp-[text-lg-xl-clamp] font-semibold'>
-                ABOUT
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className='mr-16 flex min-w-max shrink-0 gap-16'>
-          {aboutItems.map((_, idx) => (
-            <div
-              key={`dup-${idx}`}
-              className='flex shrink-0 items-center justify-center gap-4 px-8'
-            >
-              <div className='bg-primary clamp-[size-8-12-clamp] rounded-full' />
-              <span className='clamp-[text-lg-xl-clamp] font-semibold'>
-                ABOUT
-              </span>
-            </div>
-          ))}
-        </div>
+        <MarqueeItems ref={containerRef} />
+        <MarqueeItems />
       </motion.div>
-    </div>
+    </Link>
   );
 }
 
