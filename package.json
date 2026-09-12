@@ -6,14 +6,7 @@
   "license": "AGPL-3.0-or-later",
   "type": "module",
   "scripts": {
-    "dev": "vp dev",
-    "build": "vp build",
-    "preview": "vp preview",
-    "check": "vp check",
-    "check:fix": "vp check --fix",
-    "lint": "vp lint",
-    "fmt": "vp fmt",
-    "test": "vp test"
+    "ui:add": "vp dlx shadcn@latest add"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
