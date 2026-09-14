@@ -141,6 +141,7 @@ export default defineConfig({
       // Import
       'import/no-cycle': 'error',
       'import/no-duplicates': 'error',
+      'import/consistent-type-specifier-style': 'off',
       'import/no-default-export': 'off',
       'import/no-named-export': 'off',
       'import/prefer-default-export': 'off',
