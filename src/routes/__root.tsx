@@ -1,25 +1,24 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router';
 
 import { CanvasCursor } from '@/components/CanvasCursor';
-import { Header } from '@/components/Header';
-import { NotFound } from '@/components/NotFound';
-import { Toaster } from '@/components/ui/sonner';
-import { TooltipProvider } from '@/components/ui/tooltip';
+import { NotFound } from '@/components/layout/NotFound';
+import { SiteFooter } from '@/components/layout/SiteFooter';
 
 export const Route = createRootRoute({
+  head: () => ({ meta: [{ title: 'Karoline Z.L.H · UX/UI designer' }] }),
   component: RootLayout,
   notFoundComponent: NotFound,
 });
 
 function RootLayout() {
   return (
-    <TooltipProvider>
+    <>
+      <HeadContent />
       <CanvasCursor />
-      <div className='relative flex min-h-dvh flex-col'>
-        <Header />
+      <div className='flex min-h-svh flex-col'>
         <Outlet />
+        <SiteFooter />
       </div>
-      <Toaster />
-    </TooltipProvider>
+    </>
   );
 }

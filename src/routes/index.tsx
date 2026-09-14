@@ -1,6 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { AboutSeparator } from '@/components/AboutSeparator';
+import { CreativePrompt } from '@/components/home/CreativePrompt';
+import { Hero } from '@/components/home/Hero';
+import { Manifesto } from '@/components/home/Manifesto';
+import { WorkGrid } from '@/components/home/WorkGrid';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -8,13 +11,11 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   return (
-    <main className='flex flex-1 flex-col'>
-      <section className='mx-auto flex min-h-dvh w-full max-w-(--breakpoint-2xl) items-center justify-center px-[clamp(1rem,4vw,6rem)] py-6'>
-        <h1 className='text-center text-[clamp(4.5rem,12vw,8rem)] leading-none font-medium'>
-          KAROLINE ZHIWEN LIE HOLM
-        </h1>
-      </section>
-      <AboutSeparator />
+    <main>
+      <Hero />
+      <Manifesto />
+      <WorkGrid />
+      <CreativePrompt />
     </main>
   );
 }

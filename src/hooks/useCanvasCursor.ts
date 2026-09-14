@@ -126,12 +126,8 @@ function useCanvasCursor(config: Partial<CursorEffectConfig> = {}) {
         canvas.height = window.innerHeight;
       },
       render = () => {
-        ctx.globalCompositeOperation = 'source-over';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.strokeStyle = getComputedStyle(document.documentElement)
-          .getPropertyValue('--color-primary')
-          .trim();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
         ctx.lineWidth = 1;
         for (const line of lines) {
           line.update();

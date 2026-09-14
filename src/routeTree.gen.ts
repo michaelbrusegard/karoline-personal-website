@@ -12,8 +12,9 @@ import { Route as rootRouteImport } from './routes/__root';
 import { Route as IndexRouteImport } from './routes/index';
 import { Route as AboutRouteImport } from './routes/about';
 import { Route as ContactRouteImport } from './routes/contact';
-import { Route as ProjectsIndexRouteImport } from './routes/projects/index';
-import { Route as ProjectsSlugRouteImport } from './routes/projects/$slug';
+import { Route as CreativeCornerRouteImport } from './routes/creative-corner';
+import { Route as WorkIndexRouteImport } from './routes/work/index';
+import { Route as WorkSlugRouteImport } from './routes/work/$slug';
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,14 +31,19 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any);
-const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
-  id: '/projects/',
-  path: '/projects/',
+const CreativeCornerRoute = CreativeCornerRouteImport.update({
+  id: '/creative-corner',
+  path: '/creative-corner',
   getParentRoute: () => rootRouteImport,
 } as any);
-const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
-  id: '/projects/$slug',
-  path: '/projects/$slug',
+const WorkIndexRoute = WorkIndexRouteImport.update({
+  id: '/work/',
+  path: '/work/',
+  getParentRoute: () => rootRouteImport,
+} as any);
+const WorkSlugRoute = WorkSlugRouteImport.update({
+  id: '/work/$slug',
+  path: '/work/$slug',
   getParentRoute: () => rootRouteImport,
 } as any);
 
@@ -45,39 +51,51 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute;
   '/about': typeof AboutRoute;
   '/contact': typeof ContactRoute;
-  '/projects/$slug': typeof ProjectsSlugRoute;
-  '/projects/': typeof ProjectsIndexRoute;
+  '/creative-corner': typeof CreativeCornerRoute;
+  '/work/$slug': typeof WorkSlugRoute;
+  '/work/': typeof WorkIndexRoute;
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute;
   '/about': typeof AboutRoute;
   '/contact': typeof ContactRoute;
-  '/projects/$slug': typeof ProjectsSlugRoute;
-  '/projects': typeof ProjectsIndexRoute;
+  '/creative-corner': typeof CreativeCornerRoute;
+  '/work/$slug': typeof WorkSlugRoute;
+  '/work': typeof WorkIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   '/': typeof IndexRoute;
   '/about': typeof AboutRoute;
   '/contact': typeof ContactRoute;
-  '/projects/$slug': typeof ProjectsSlugRoute;
-  '/projects/': typeof ProjectsIndexRoute;
+  '/creative-corner': typeof CreativeCornerRoute;
+  '/work/$slug': typeof WorkSlugRoute;
+  '/work/': typeof WorkIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/about' | '/contact' | '/projects/$slug' | '/projects/';
+  fullPaths:
+    '/' | '/about' | '/contact' | '/creative-corner' | '/work/$slug' | '/work/';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/about' | '/contact' | '/projects/$slug' | '/projects';
+  to:
+    '/' | '/about' | '/contact' | '/creative-corner' | '/work/$slug' | '/work';
   id:
-    '__root__' | '/' | '/about' | '/contact' | '/projects/$slug' | '/projects/';
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/creative-corner'
+    | '/work/$slug'
+    | '/work/';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   AboutRoute: typeof AboutRoute;
   ContactRoute: typeof ContactRoute;
-  ProjectsSlugRoute: typeof ProjectsSlugRoute;
-  ProjectsIndexRoute: typeof ProjectsIndexRoute;
+  CreativeCornerRoute: typeof CreativeCornerRoute;
+  WorkSlugRoute: typeof WorkSlugRoute;
+  WorkIndexRoute: typeof WorkIndexRoute;
 }
 
 declare module '@tanstack/react-router' {
@@ -103,18 +121,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport;
       parentRoute: typeof rootRouteImport;
     };
-    '/projects/': {
-      id: '/projects/';
-      path: '/projects';
-      fullPath: '/projects/';
-      preLoaderRoute: typeof ProjectsIndexRouteImport;
+    '/creative-corner': {
+      id: '/creative-corner';
+      path: '/creative-corner';
+      fullPath: '/creative-corner';
+      preLoaderRoute: typeof CreativeCornerRouteImport;
       parentRoute: typeof rootRouteImport;
     };
-    '/projects/$slug': {
-      id: '/projects/$slug';
-      path: '/projects/$slug';
-      fullPath: '/projects/$slug';
-      preLoaderRoute: typeof ProjectsSlugRouteImport;
+    '/work/': {
+      id: '/work/';
+      path: '/work';
+      fullPath: '/work/';
+      preLoaderRoute: typeof WorkIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    '/work/$slug': {
+      id: '/work/$slug';
+      path: '/work/$slug';
+      fullPath: '/work/$slug';
+      preLoaderRoute: typeof WorkSlugRouteImport;
       parentRoute: typeof rootRouteImport;
     };
   }
@@ -124,8 +149,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  ProjectsSlugRoute: ProjectsSlugRoute,
-  ProjectsIndexRoute: ProjectsIndexRoute,
+  CreativeCornerRoute: CreativeCornerRoute,
+  WorkSlugRoute: WorkSlugRoute,
+  WorkIndexRoute: WorkIndexRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
