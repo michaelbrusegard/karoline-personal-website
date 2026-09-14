@@ -107,7 +107,15 @@ type Project = {
   hero: { src: string; width: number; height: number };
   facts: Fact[];
   sections: Section[];
-  link?: { label: string; href: string };
+  link?: {
+    /** Headline for the closing call to action. */
+    label: string;
+    href: string;
+    /** Button text. */
+    action: string;
+    /** Extra detail under the button, e.g. length and language of a report. */
+    note?: string;
+  };
 };
 
 const projects: Project[] = [
@@ -360,6 +368,7 @@ const projects: Project[] = [
     ],
     link: {
       label: 'See the prototype',
+      action: 'Prototype',
       href: 'https://www.figma.com/proto/PWUONzsPHxYGZdS5bUKnkD/App-prototype?node-id=5333-3390&t=Ga6GUCH5HdrxnPuj-0&scaling=scale-down&content-scaling=fixed&page-id=5015%3A779&starting-point-node-id=5067%3A2126&show-proto-sidebar=1',
     },
   },
@@ -495,6 +504,7 @@ const projects: Project[] = [
     ],
     link: {
       label: 'See the prototype',
+      action: 'Prototype',
       href: 'https://www.figma.com/proto/OBPubyYTT0au7afzKDu8hi/Manafish?node-id=5265-366&t=RRqXubQgvZs1Go1w-0&scaling=min-zoom&content-scaling=fixed&page-id=5155%3A310',
     },
   },
@@ -691,6 +701,7 @@ const projects: Project[] = [
     ],
     link: {
       label: 'See the prototype',
+      action: 'Prototype',
       href: 'https://www.figma.com/proto/4sgRPjCScnt8iWAzwLp2r7/SIT-Fitness-Center-Mobile-App-System?node-id=11-19&t=IkOhAfBlx1FP0hm2-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
     },
   },
@@ -901,6 +912,12 @@ const projects: Project[] = [
           'The key learning was having the confidence to challenge the brief and focus on what St. Olav’s actually needed. The value was not in the design methods themselves, but in the strategic decisions they enabled.',
       },
     ],
+    link: {
+      label: 'Read the whole story',
+      action: 'Report (PDF)',
+      href: '/reports/hjemmesykehus.pdf',
+      note: '59 pages · Norwegian · 1.7 MB',
+    },
   },
   {
     slug: 'tempo',
@@ -1091,6 +1108,12 @@ const projects: Project[] = [
           'The biggest learning was the importance of having the courage to challenge the original brief. Presenting to the municipal council also taught me that understanding a solution is different from communicating it in a way that makes others trust it.',
       },
     ],
+    link: {
+      label: 'Download report',
+      action: 'Report (PDF)',
+      href: '/reports/tempo-bydelskafe.pdf',
+      note: '38 pages · Norwegian · 19 MB',
+    },
   },
   {
     slug: 'pastael',

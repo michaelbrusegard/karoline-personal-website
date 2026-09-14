@@ -75,12 +75,17 @@ function CaseStudyPage() {
           <Container className='py-[clamp(3rem,6vw,5rem)]'>
             <Reveal className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
               <Headline size='headline'>{project.link.label}</Headline>
-              <PillLink
-                size='lg'
-                render={<a href={project.link.href} target='_blank' rel='noreferrer' />}
-              >
-                Link
-              </PillLink>
+              <div className='flex flex-col items-start gap-3 md:items-end'>
+                <PillLink
+                  size='lg'
+                  render={<a href={project.link.href} target='_blank' rel='noreferrer' />}
+                >
+                  {project.link.action}
+                </PillLink>
+                {project.link.note ? (
+                  <p className='text-tag text-muted-foreground uppercase'>{project.link.note}</p>
+                ) : null}
+              </div>
             </Reveal>
           </Container>
         ) : null}
