@@ -2,7 +2,7 @@
   "name": "Karoline Zhiwen Lie Holm",
   "short_name": "Karoline",
   "icons": [{ "src": "/favicon/favicon.svg", "sizes": "any", "type": "image/svg+xml" }],
-  "theme_color": "#84cc16",
-  "background_color": "#fffbeb",
+  "theme_color": "#0a0a0a",
+  "background_color": "#f0f0f0",
   "display": "standalone"
 }
