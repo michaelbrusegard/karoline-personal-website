@@ -358,7 +358,10 @@ const projects: Project[] = [
           'A key learning was how to balance the client’s goals with the users’ needs. When the client proposed an AI based conversational bot, our research suggested it could reduce trust among a vulnerable target group. I challenged the direction and used our research to argue for an alternative. This taught me that good design leadership is not only about driving the process forward, but also having the confidence to challenge decisions when the evidence points elsewhere.',
       },
     ],
-    link: { label: 'See the prototype', href: '#' },
+    link: {
+      label: 'See the prototype',
+      href: 'https://www.figma.com/proto/PWUONzsPHxYGZdS5bUKnkD/App-prototype?node-id=5333-3390&t=Ga6GUCH5HdrxnPuj-0&scaling=scale-down&content-scaling=fixed&page-id=5015%3A779&starting-point-node-id=5067%3A2126&show-proto-sidebar=1',
+    },
   },
   {
     slug: 'manafish',
@@ -490,7 +493,10 @@ const projects: Project[] = [
           'I learned to turn a hands-on build process into something clear on screen, by finding where people get stuck and designing around it. I learned a good purchase flow isn’t persuasion, it’s honest information that lets people decide for themselves.',
       },
     ],
-    link: { label: 'See the prototype', href: '#' },
+    link: {
+      label: 'See the prototype',
+      href: 'https://www.figma.com/proto/OBPubyYTT0au7afzKDu8hi/Manafish?node-id=5265-366&t=RRqXubQgvZs1Go1w-0&scaling=min-zoom&content-scaling=fixed&page-id=5155%3A310',
+    },
   },
   {
     slug: 'sit',
@@ -683,7 +689,10 @@ const projects: Project[] = [
           'The most valuable information was already inside Sit’s system. Good product design is often about relocating information to where the decision actually happens, not inventing new data.',
       },
     ],
-    link: { label: 'See the prototype', href: '#' },
+    link: {
+      label: 'See the prototype',
+      href: 'https://www.figma.com/proto/4sgRPjCScnt8iWAzwLp2r7/SIT-Fitness-Center-Mobile-App-System?node-id=11-19&t=IkOhAfBlx1FP0hm2-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
+    },
   },
   {
     slug: 'hospital-at-home',
@@ -892,7 +901,6 @@ const projects: Project[] = [
           'The key learning was having the confidence to challenge the brief and focus on what St. Olav’s actually needed. The value was not in the design methods themselves, but in the strategic decisions they enabled.',
       },
     ],
-    link: { label: 'Read the whole story', href: '#' },
   },
   {
     slug: 'tempo',
@@ -1083,7 +1091,6 @@ const projects: Project[] = [
           'The biggest learning was the importance of having the courage to challenge the original brief. Presenting to the municipal council also taught me that understanding a solution is different from communicating it in a way that makes others trust it.',
       },
     ],
-    link: { label: 'Download report', href: '#' },
   },
   {
     slug: 'pastael',
