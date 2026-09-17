@@ -1,8 +1,45 @@
 import tailwindcss from '@tailwindcss/vite';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite-plus';
+
+import { projects } from './src/content/projects';
+
+/**
+ * GitHub Pages only serves files that exist, so a deep link like /work/sit would 404.
+ * Write the app shell to every known route, and to 404.html for anything unknown.
+ * The router reads the URL and renders the right page in both cases.
+ */
+function githubPagesRoutes() {
+  const routes = [
+    'about',
+    'contact',
+    'creative-corner',
+    ...projects.map((project) => `work/${project.slug}`),
+  ];
+  let outDir = 'dist';
+
+  return {
+    name: 'github-pages-routes',
+    apply: 'build' as const,
+    configResolved(config: { root: string; build: { outDir: string } }) {
+      outDir = resolve(config.root, config.build.outDir);
+    },
+    async closeBundle() {
+      const shell = await readFile(join(outDir, 'index.html'), 'utf8');
+      await Promise.all(
+        routes.map(async (route) => {
+          await mkdir(join(outDir, route), { recursive: true });
+          await writeFile(join(outDir, route, 'index.html'), shell);
+        }),
+      );
+      await writeFile(join(outDir, '404.html'), shell);
+    },
+  };
+}
 
 export default defineConfig({
   plugins: [
@@ -16,6 +53,7 @@ export default defineConfig({
     }),
     react({ compiler: true }),
     tailwindcss(),
+    githubPagesRoutes(),
   ],
   resolve: {
     alias: {
