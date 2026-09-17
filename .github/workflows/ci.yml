@@ -19,7 +19,7 @@ jobs:
       - run: bunx vp build
 
   deploy:
-    # Publishes to karolinekzh.com via GitHub Pages, only once checks pass.
+    # Publishes to www.karolinekzh.com via GitHub Pages, only once checks pass.
     needs: check
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest

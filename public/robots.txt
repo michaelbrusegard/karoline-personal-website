@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://karolinekzh.com/sitemap.xml
+Sitemap: https://www.karolinekzh.com/sitemap.xml
