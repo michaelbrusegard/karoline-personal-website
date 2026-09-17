@@ -1,5 +1,5 @@
 const site = {
-  url: 'https://www.karolinekzh.com',
+  url: 'https://www.karolinezlh.com',
   name: 'Karoline Zhiwen Lie Holm',
   shortName: 'Karoline Z.L.H',
   firstName: 'Karoline',
