@@ -64,7 +64,7 @@ const creative = {
       src: '/images/creative/awesome-card.webp',
       alt: 'Hand-drawn card reading “not only for what you do, but for being awesome”',
       title: 'For being awesome',
-      medium: 'Handmade · watercolour',
+      medium: 'Handmade',
       aspect: '947 / 692',
       width: 475,
     },
