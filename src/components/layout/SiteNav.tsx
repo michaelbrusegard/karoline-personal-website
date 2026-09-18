@@ -20,8 +20,8 @@ function SiteNav({ variant = 'bar', className }: SiteNavProps) {
   return (
     <header
       className={cn(
-        'z-40 flex w-full flex-wrap items-center justify-between gap-x-6 gap-y-3 px-gutter py-5 text-caption uppercase md:py-6',
-        variant === 'overlay' ? 'absolute inset-x-0 top-0 text-bone' : 'relative',
+        'z-40 flex w-full flex-wrap items-center justify-between gap-x-6 gap-y-3 px-gutter py-5 text-base uppercase md:py-6',
+        variant === 'overlay' ? 'absolute inset-x-0 top-0 text-bone' : 'relative text-ink',
         className,
       )}
     >
