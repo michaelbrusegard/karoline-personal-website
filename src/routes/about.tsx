@@ -58,8 +58,8 @@ function Portrait() {
           <Arrow src='arrow-left' w={315} h={268} className='top-[43%] -left-[20%] w-[26%]' />
 
           <Note className='top-[19%] left-[116%] rotate-6 whitespace-nowrap'>{noteTopRight}</Note>
-          <Arrow src='arrow-right' w={194} h={172} className='top-[45%] left-[93%] w-[16%]' />
-          <Note className='top-[37%] left-[110%] w-[15ch] rotate-3'>{noteBottomRight}</Note>
+          <Arrow src='arrow-right' w={194} h={172} className='top-[26%] left-[93%] w-[19%]' />
+          <Note className='top-[40%] left-[104%] w-[15ch] rotate-3'>{noteBottomRight}</Note>
 
           <img
             src={about.portrait.src}
