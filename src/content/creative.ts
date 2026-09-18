@@ -17,7 +17,7 @@ const creative = {
       alt: 'Flyt — a white game controller with green thumbsticks and its technical drawings',
       title: 'Flyt',
       medium: '3D modeling · product design',
-      aspect: '1080 / 760',
+      aspect: '1078 / 752',
       width: 540,
     },
     {
@@ -41,7 +41,7 @@ const creative = {
       alt: 'Handmade Christmas card with lace on green holly paper',
       title: 'Christmas card',
       medium: 'Handmade',
-      aspect: '1108 / 812',
+      aspect: '1090 / 804',
       width: 554,
     },
     {
@@ -49,7 +49,7 @@ const creative = {
       alt: 'Handmade Merry Christmas card with lace border on red paper',
       title: 'Merry Christmas',
       medium: 'Handmade',
-      aspect: '808 / 660',
+      aspect: '801 / 652',
       width: 404,
     },
     {
@@ -57,7 +57,7 @@ const creative = {
       alt: 'Handmade Merry Christmas card with ribbon and leaves',
       title: 'Merry Christmas II',
       medium: 'Handmade',
-      aspect: '960 / 812',
+      aspect: '960 / 806',
       width: 480,
     },
     {
@@ -65,7 +65,7 @@ const creative = {
       alt: 'Hand-drawn card reading “not only for what you do, but for being awesome”',
       title: 'For being awesome',
       medium: 'Handmade · watercolour',
-      aspect: '950 / 700',
+      aspect: '947 / 692',
       width: 475,
     },
   ],
