@@ -54,12 +54,12 @@ function Portrait() {
           need real margin, so below lg the notes drop under the photo instead.
         */}
         <Reveal when='mount' delay={0.2} className='relative mx-auto mt-12 max-w-[34rem]'>
-          <Note className='top-[35%] -left-[41%] -rotate-12'>{noteLeft}</Note>
+          <Note className='top-[36%] -left-[38%] -rotate-12'>{noteLeft}</Note>
           <Arrow src='arrow-left' w={315} h={268} className='top-[43%] -left-[20%] w-[26%]' />
 
           <Note className='top-[19%] left-[116%] rotate-6 whitespace-nowrap'>{noteTopRight}</Note>
           <Arrow src='arrow-right' w={194} h={172} className='top-[45%] left-[93%] w-[16%]' />
-          <Note className='top-[59%] left-[103%] w-[15ch] rotate-3'>{noteBottomRight}</Note>
+          <Note className='top-[37%] left-[110%] w-[15ch] rotate-3'>{noteBottomRight}</Note>
 
           <img
             src={about.portrait.src}
