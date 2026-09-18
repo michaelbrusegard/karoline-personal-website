@@ -46,26 +46,20 @@ function Portrait() {
         </div>
 
         {/*
-          Side annotations live in grid columns beside the polaroid rather than at
-          negative offsets, so they can never overflow the viewport. Each arrow is
-          pinned to the column edge the photo sits on, which is what makes it read
-          as pointing at her. Below lg there is no room for margins, so the notes
-          drop under the photo instead.
+          The annotations reproduce the geometry of Karoline's Figma page, measured
+          relative to the visible polaroid card (which is inset ~6% inside the image
+          box by its shadow margin). The left arrow's tail tucks under the card edge
+          — the image renders after it — and the right arrow springs off the card's
+          right edge pointing up and out, exactly as she drew it. Side annotations
+          need real margin, so below lg the notes drop under the photo instead.
         */}
-        <Reveal
-          when='mount'
-          delay={0.2}
-          className='mx-auto mt-12 grid max-w-6xl grid-cols-1 lg:grid-cols-[1fr_minmax(0,30rem)_1fr]'
-        >
-          <div className='relative hidden lg:block'>
-            <Note className='top-[20%] right-[10%] -rotate-12'>{noteLeft}</Note>
-            <Arrow
-              src='arrow-left'
-              w={315}
-              h={268}
-              className='top-[31%] -right-[4%] w-[min(76%,12rem)]'
-            />
-          </div>
+        <Reveal when='mount' delay={0.2} className='relative mx-auto mt-12 max-w-[34rem]'>
+          <Note className='top-[35%] -left-[41%] -rotate-12'>{noteLeft}</Note>
+          <Arrow src='arrow-left' w={315} h={268} className='top-[43%] -left-[20%] w-[26%]' />
+
+          <Note className='top-[19%] left-[116%] rotate-6 whitespace-nowrap'>{noteTopRight}</Note>
+          <Arrow src='arrow-right' w={194} h={172} className='top-[45%] left-[93%] w-[16%]' />
+          <Note className='top-[59%] left-[103%] w-[15ch] rotate-3'>{noteBottomRight}</Note>
 
           <img
             src={about.portrait.src}
@@ -73,19 +67,8 @@ function Portrait() {
             width={604}
             height={819}
             fetchPriority='high'
-            className='w-full'
+            className='relative w-full'
           />
-
-          <div className='relative hidden lg:block'>
-            <Note className='top-[14%] left-[14%] rotate-6'>{noteTopRight}</Note>
-            <Arrow
-              src='arrow-right'
-              w={194}
-              h={172}
-              className='top-[52%] -left-[5%] w-[min(52%,8rem)] -scale-x-100'
-            />
-            <Note className='top-[73%] left-[18%] rotate-3'>{noteBottomRight}</Note>
-          </div>
         </Reveal>
 
         <ul className='mx-auto mt-10 flex max-w-md flex-wrap items-center justify-center gap-x-8 gap-y-4 lg:hidden'>
@@ -113,7 +96,7 @@ type NoteProps = {
 function Note({ className, children }: NoteProps) {
   return (
     <span
-      className={`pointer-events-none absolute max-w-[14ch] text-[0.8rem] leading-tight tracking-wide ${className ?? ''}`}
+      className={`pointer-events-none absolute max-w-[14ch] text-[0.8rem] leading-tight tracking-wide max-lg:hidden ${className ?? ''}`}
     >
       {children}
     </span>
@@ -138,7 +121,7 @@ function Arrow({
       alt=''
       width={w}
       height={h}
-      className={`pointer-events-none absolute ${className ?? ''}`}
+      className={`pointer-events-none absolute max-lg:hidden ${className ?? ''}`}
     />
   );
 }
