@@ -45,24 +45,28 @@ function Portrait() {
           </Reveal>
         </div>
 
-        <Reveal when='mount' delay={0.2} className='relative mx-auto mt-12 max-w-[34rem]'>
-          <Note className='top-[26%] -left-[37%] -rotate-12'>{noteLeft}</Note>
-          <img
-            src='/images/about/arrow-left.webp'
-            alt=''
-            width={315}
-            height={391}
-            className='pointer-events-none absolute top-[33%] -left-[32%] w-[33%] max-md:hidden'
-          />
-          <Note className='top-[14%] -right-[31%] rotate-6'>{noteTopRight}</Note>
-          <img
-            src='/images/about/arrow-right.webp'
-            alt=''
-            width={194}
-            height={172}
-            className='pointer-events-none absolute top-[48%] -right-[25%] w-[21%] max-md:hidden'
-          />
-          <Note className='top-[63%] -right-[33%] rotate-6'>{noteBottomRight}</Note>
+        {/*
+          Side annotations live in grid columns beside the polaroid rather than at
+          negative offsets, so they can never overflow the viewport. Each arrow is
+          pinned to the column edge the photo sits on, which is what makes it read
+          as pointing at her. Below lg there is no room for margins, so the notes
+          drop under the photo instead.
+        */}
+        <Reveal
+          when='mount'
+          delay={0.2}
+          className='mx-auto mt-12 grid max-w-6xl grid-cols-1 lg:grid-cols-[1fr_minmax(0,30rem)_1fr]'
+        >
+          <div className='relative hidden lg:block'>
+            <Note className='top-[20%] right-[10%] -rotate-12'>{noteLeft}</Note>
+            <Arrow
+              src='arrow-left'
+              w={315}
+              h={268}
+              className='top-[31%] -right-[4%] w-[min(76%,12rem)]'
+            />
+          </div>
+
           <img
             src={about.portrait.src}
             alt={about.portrait.alt}
@@ -71,10 +75,28 @@ function Portrait() {
             fetchPriority='high'
             className='w-full'
           />
+
+          <div className='relative hidden lg:block'>
+            <Note className='top-[14%] left-[14%] rotate-6'>{noteTopRight}</Note>
+            <Arrow
+              src='arrow-right'
+              w={194}
+              h={172}
+              className='top-[52%] -left-[5%] w-[min(52%,8rem)] -scale-x-100'
+            />
+            <Note className='top-[73%] left-[18%] rotate-3'>{noteBottomRight}</Note>
+          </div>
         </Reveal>
-        <ul className='mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-tag text-muted-foreground uppercase md:hidden'>
-          {about.notes.map((note) => (
-            <li key={note}>{note}</li>
+
+        <ul className='mx-auto mt-10 flex max-w-md flex-wrap items-center justify-center gap-x-8 gap-y-4 lg:hidden'>
+          {about.notes.map((note, index) => (
+            <li
+              key={note}
+              className='max-w-[18ch] text-center text-[0.8rem] leading-tight tracking-wide'
+              style={{ rotate: `${[-3, 2, -2][index] ?? 0}deg` }}
+            >
+              {note}
+            </li>
           ))}
         </ul>
       </Container>
@@ -87,14 +109,37 @@ type NoteProps = {
   children: React.ReactNode;
 };
 
-/** Hand-written aside pinned around the portrait; hidden below md where there's no margin. */
+/** Hand-written aside pinned beside the portrait. */
 function Note({ className, children }: NoteProps) {
   return (
     <span
-      className={`pointer-events-none absolute max-w-[14ch] text-[0.8rem] leading-tight tracking-wide max-md:hidden ${className ?? ''}`}
+      className={`pointer-events-none absolute max-w-[14ch] text-[0.8rem] leading-tight tracking-wide ${className ?? ''}`}
     >
       {children}
     </span>
+  );
+}
+
+/** Hand-drawn arrow linking a note to the photo. */
+function Arrow({
+  src,
+  w,
+  h,
+  className,
+}: {
+  src: string;
+  w: number;
+  h: number;
+  className?: string;
+}) {
+  return (
+    <img
+      src={`/images/about/${src}.webp`}
+      alt=''
+      width={w}
+      height={h}
+      className={`pointer-events-none absolute ${className ?? ''}`}
+    />
   );
 }
 
